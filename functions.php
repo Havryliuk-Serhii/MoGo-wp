@@ -22,7 +22,6 @@ function mogo_setup() {
 			'caption',
 		) );
 	}
-
 add_action( 'after_setup_theme', 'mogo_setup' );
 
 /**
@@ -31,20 +30,16 @@ add_action( 'after_setup_theme', 'mogo_setup' );
 function mogo_scripts() {
 	// add styles
 	wp_enqueue_style( 'mogo-style', get_stylesheet_uri() );
-  wp_enqueue_style( 'mogo-grid-style', get_template_directory_uri() . '/css/bootstrap-grid.min.css');
-  wp_enqueue_style( 'mogo-reboot-style', get_template_directory_uri() . '/css/bootstrap-reboot.min.css');
-  wp_enqueue_style( 'mogo-bootstrap-style', get_template_directory_uri() . '/css/bootstrap.min.css');
-	//wp_enqueue_style( 'mogo-fontawesome-style', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css', array(), '5.11.2' );
+  wp_enqueue_style( 'mogo-grid', get_template_directory_uri() . '/css/bootstrap-grid.min.css');
+  wp_enqueue_style( 'mogo-reboot', get_template_directory_uri() . '/css/bootstrap-reboot.min.css');
+  wp_enqueue_style( 'mogo-bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
+	wp_enqueue_style( 'mogo-fontawesome-style', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css', array(), '5.11.2' );
 	wp_enqueue_style( 'mogo-main-style', get_template_directory_uri() . '/css/main.css');
 	// add scripts
 	wp_enqueue_script( 'mogo-jquery-slim',  get_template_directory_uri() . '/js/jquery-3.4.1.slim.min.js', array(),'3.4.1', true);
 	wp_enqueue_script( 'mogo-popper-script', get_template_directory_uri() . '/js/popper.min.js', array(), '', true );
 	wp_enqueue_script( 'mogo-bootstrap-script', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '', true );
 	wp_enqueue_script( 'mogo-main-script', get_template_directory_uri() . '/js/custom.js', array(), '', true );
-
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
-	}
 }
 add_action( 'wp_enqueue_scripts', 'mogo_scripts' );
 
@@ -125,4 +120,65 @@ function filter_menu_li(){
 }
 function filter_menu_id(){
     return;
+}
+
+/**
+ * Custom Slider
+ **/
+add_action('init', 'my_custom_slider');
+function my_custom_slider(){
+	register_post_type('slider', array(
+		'labels'             => array(
+			'name'               => 'Slider',
+			'singular_name'      => 'Slider',
+			'add_new'            => 'Add new ',
+			'add_new_item'       => 'Add new slider',
+			'edit_item'          => 'Edit slider',
+			'new_item'           => 'New slider',
+			'view_item'          => 'View slider',
+			'search_items'       => 'Search slider',
+			'not_found'          =>  'Slider not found',
+			'not_found_in_trash' => 'Slider not found in trash',
+			'parent_item_colon'  => '',
+			'menu_name'          => 'Slider',
+		  ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => true,
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+    'menu_icon'          => 'dashicons-images-alt',
+    'menu_position'      => 9,
+		'supports'           => array('title','editor', 'thumbnail', )
+	) );
+}
+
+/**
+*  Options fallback
+*/
+if ( ! function_exists( 'mogo_all_option' ) ) {
+	function mogo_all_option()
+	{
+		return get_option('mogo');
+	}
+}
+if ( ! function_exists( 'mogo_of_get_option' ) ) {
+	function mogo_of_get_option( $name, $default = false )
+	{
+			$config = mogo_all_option();
+
+			if ( ! isset( $config['id'] ) )
+				return $default;
+
+			$options = get_option( $config['id'] );
+
+			if ( isset( $options[$name] ) )
+				return $options[$name];
+
+			return $default;
+	}
 }

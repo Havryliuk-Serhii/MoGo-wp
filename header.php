@@ -8,9 +8,17 @@
 	</head>
 	<body <?php body_class(); ?>>
 		<header class="header" role="banner">
-      <div class="container">
-        <div class="row">
           <nav class="navbar navbar-expand-lg fixed-top" id="nav">
+						<!--<div class="search-wrap">
+			        <div class="container">
+			          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+			          <form action="#" method="post">
+			            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+			          </form>
+			        </div>
+			      </div>-->
+						<div class="container">
+			        <div class="row">
       				<a class="navbar-brand" href="<?php echo home_url(); ?>"><?php bloginfo( 'name' ); ?></a>
       				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         				<span class="navbar-toggler-icon"></span>
@@ -29,8 +37,12 @@
                       ] );
                 ?>
       				</div>
+              <div class="icons">
+                <a href="#" class="icons-btn d-inline-block js-search-open"><i class="far fa-search"></i></a>
+                <a href="cart.html" class="icons-btn d-inline-block bag"><i class="far fa-shopping-cart"></i></a>
+              </div>
+						</div>
+					</div>
     			</nav>
-        </div>
-      </div>
 		</header>
 		<main role="main">

@@ -1,0 +1,18 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body{
+	color: #e89183;
+}
+@import "scss/vars";
+@import "scss/mixins";
+
+@import "scss/section-styles/header";
+@import "scss/section-styles/hero";
+@import "scss/section-styles/about";
+@import "scss/section-styles/service";
+@import "scss/section-styles/work";
+@import "scss/section-styles/blog";
+@import "scss/section-styles/contact";
