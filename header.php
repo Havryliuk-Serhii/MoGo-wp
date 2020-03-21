@@ -8,15 +8,7 @@
 	</head>
 	<body <?php body_class(); ?>>
 		<header class="header" role="banner">
-          <nav class="navbar navbar-expand-lg fixed-top" id="nav">
-						<!--<div class="search-wrap">
-			        <div class="container">
-			          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
-			          <form action="#" method="post">
-			            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
-			          </form>
-			        </div>
-			      </div>-->
+          <nav class="navbar navbar-expand-lg hero-bg" id="nav">
 						<div class="container">
 			        <div class="row">
       				<a class="navbar-brand" href="<?php echo home_url(); ?>"><?php bloginfo( 'name' ); ?></a>
@@ -37,10 +29,21 @@
                       ] );
                 ?>
       				</div>
-              <div class="icons">
-                <a href="#" class="icons-btn d-inline-block js-search-open"><i class="far fa-search"></i></a>
-                <a href="cart.html" class="icons-btn d-inline-block bag"><i class="far fa-shopping-cart"></i></a>
-              </div>
+              <div class="icon-top">
+              <ul class="top-menu list-inline">
+                <li class="dropdown cart-nav dropdown-slide">
+                  <a href="#"><i class="fas fa-shopping-cart"></i></a>
+                </li>
+                <li class="dropdown search dropdown-slide">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="fas fa-search"></i></a>
+                    <ul class="dropdown-menu search-dropdown">
+                      <li>
+                        <?php get_search_form(); ?>
+                      </li>
+                    </ul>
+                </li>
+              </ul>
+            </div>
 						</div>
 					</div>
     			</nav>

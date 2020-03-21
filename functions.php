@@ -1,17 +1,11 @@
 <?php
+show_admin_bar(false);
 function mogo_setup() {
+
 		add_theme_support( 'title-tag' );
-
-		/**
- 		* Register post-thumbnails.
-		**/
 		add_theme_support( 'post-thumbnails' );
-
-		/**
- 		* Register menu.
-		**/
 		register_nav_menus( array(
-			'primary' => esc_html__( 'Primary', 'mogo' ),
+			'menu-1' => esc_html__( 'Primary', 'mogo' ),
 		) );
 
 		add_theme_support( 'html5', array(
@@ -21,28 +15,27 @@ function mogo_setup() {
 			'gallery',
 			'caption',
 		) );
-	}
+}
 add_action( 'after_setup_theme', 'mogo_setup' );
 
 /**
  * Enqueue scripts and styles.
-**/
+ */
 function mogo_scripts() {
 	// add styles
 	wp_enqueue_style( 'mogo-style', get_stylesheet_uri() );
-  wp_enqueue_style( 'mogo-grid', get_template_directory_uri() . '/css/bootstrap-grid.min.css');
+	wp_enqueue_style( 'mogo-grid', get_template_directory_uri() . '/css/bootstrap-grid.min.css');
   wp_enqueue_style( 'mogo-reboot', get_template_directory_uri() . '/css/bootstrap-reboot.min.css');
   wp_enqueue_style( 'mogo-bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
 	wp_enqueue_style( 'mogo-fontawesome-style', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css', array(), '5.11.2' );
 	wp_enqueue_style( 'mogo-main-style', get_template_directory_uri() . '/css/main.css');
-	// add scripts
+// add scripts
 	wp_enqueue_script( 'mogo-jquery-slim',  get_template_directory_uri() . '/js/jquery-3.4.1.slim.min.js', array(),'3.4.1', true);
 	wp_enqueue_script( 'mogo-popper-script', get_template_directory_uri() . '/js/popper.min.js', array(), '', true );
 	wp_enqueue_script( 'mogo-bootstrap-script', get_template_directory_uri() . '/js/bootstrap.min.js', array(), '', true );
 	wp_enqueue_script( 'mogo-main-script', get_template_directory_uri() . '/js/custom.js', array(), '', true );
 }
 add_action( 'wp_enqueue_scripts', 'mogo_scripts' );
-
 /**
  * Bootstrap Walker Nav menu
 **/
@@ -182,3 +175,43 @@ if ( ! function_exists( 'mogo_of_get_option' ) ) {
 			return $default;
 	}
 }
+
+
+function mogo_widgets_init() {
+	register_sidebar( array(
+		'name'          => esc_html__( 'Sidebar', 'mogo' ),
+		'id'            => 'sidebar-1',
+		'description'   => esc_html__( 'Add widgets here.', 'mogo' ),
+		'before_widget' => '<section id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
+	) );
+}
+add_action( 'widgets_init', 'mogo_widgets_init' );
+
+/**
+*  Delete square brackets
+**/
+add_filter('excerpt_more', 'my_func');
+function my_func($more) {
+	return '';
+}
+/**
+ *  Pagination
+**/
+if ( ! function_exists( 'post_pagination' ) ) :
+   function post_pagination() {
+     global $wp_query;
+     $pager = 999999999; // need an unlikely integer
+
+        echo paginate_links( array(
+             'base' => str_replace( $pager, '%#%', esc_url( get_pagenum_link( $pager ) ) ),
+             'format' => '?paged=%#%',
+						 'prev_text'    => esc_html__('Previous'),
+						 'next_text'    => esc_html__('Next'),
+             'current' => max( 1, get_query_var('paged') ),
+             'total' => $wp_query->max_num_pages
+        ) );
+   }
+endif;

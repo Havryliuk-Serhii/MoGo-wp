@@ -3,13 +3,15 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1 class="font-weight-bold text-center"><?php single_post_title(); ?></h1>
-				<div class="divider"></div>
+				<?php if ( have_posts() ) : ?>
+					<?php
+						the_archive_title( '<h1 class="font-weight-bold text-center">', '</h1>' );
+				?>		
 			</div>
-		</div>
+		</div>	
 	 	<div class="row">
-	 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-			<article  id="post-<?php the_ID(); ?>" <?php post_class('col-md-12'); ?>>
+	 	<?php while ( have_posts() ) : the_post(); ?>
+	 		<article  id="post-<?php the_ID(); ?>" <?php post_class('col-md-12'); ?>>
 				<div class="card-post">
 				    <a href="<?php the_permalink() ?>"><?php the_post_thumbnail(); ?></a>
 				    <div class="post-date d-flex flex-column align-items-center">
@@ -26,11 +28,11 @@
 				   	</div>
 				</div>
 			</article>				    	
-			<?php  	endwhile;
-						the_posts_navigation();
-					else :?>
+		<?php   endwhile;
+				the_posts_navigation();
+				else : ?>
 					<h6 class="text-center"><?php esc_html_e('No posts published','mogo' ); ?></h6>
-		<?php 
+		<?php
 			endif;
 		?> 	    	
 		</div>	

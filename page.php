@@ -8,7 +8,7 @@
 			</div>
 		</div>
 	 	<div class="row">
-	 	<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
+	 	<?php while ( have_posts() ) : the_post(); ?>
 			<article  id="post-<?php the_ID(); ?>" <?php post_class('col-md-12'); ?>>
 				<div class="card-post">
 				    <a href="<?php the_permalink() ?>"><?php the_post_thumbnail(); ?></a>
@@ -26,12 +26,9 @@
 				   	</div>
 				</div>
 			</article>				    	
-			<?php  	endwhile;
-						the_posts_navigation();
-					else :?>
-					<h6 class="text-center"><?php esc_html_e('No posts published','mogo' ); ?></h6>
-		<?php 
-			endif;
+			<?php   if ( comments_open() || get_comments_number() ) :	comments_template();
+					endif;
+			endwhile; 
 		?> 	    	
 		</div>	
 	</div>						
