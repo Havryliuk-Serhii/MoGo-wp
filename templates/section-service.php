@@ -28,7 +28,7 @@
 				</div>				
 			</div>
 			<?php endwhile; else : ?>
-			<h6 class="text-center"><?php esc_html_e('No posts published','mogo' ); ?></h6>
+				<h6 class="text-center"><?php esc_html_e('No posts published','mogo' ); ?></h6>
 			<?php endif; 
 					wp_reset_query();
 			?>

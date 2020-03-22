@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying  section Map.
+ * The template for displaying  section Testimonial.
  */
 ?>
 <section class="testimonials" style="background-image: url(<?php echo get_theme_file_uri('/img/testim-bg.png'); ?>);">
@@ -13,17 +13,29 @@
 			</div>
 		</div>
 		<div class="row">
+			<?php
+            $id = 4; 
+            $posts_testim = new WP_Query(array('cat' => $id, 'order' => 'ASC','posts_per_page' => 4));
+        ?> 
+			<?php if ($posts_testim->have_posts() ) : while ( $posts_testim->have_posts() ) : $posts_testim->the_post(); ?>
 			<div class="col-md-6">
 				<div class="media client-item">
-				  	<img src="img/layer 47.png" class="align-self-start mr-3" alt="...">
+					<div class="client-img">
+						<?php echo get_the_post_thumbnail(); ?>	
+					</div>					
 				  	<div class="testimonials-body">
-				    	<h6 class="font-weight-normal client">Matthew Dix</h6>
-						<span class="client-spec">Graphic Design</span>
+				    	<h6 class="font-weight-normal client"><?php the_title() ?></h6>
+						<span class="client-spec"><?php the_field('client_spec'); ?></span>
 						<div class="divider-client"></div>
-				    	<p class="client-post">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>   
+				    	<p class="client-post"><?php the_content(); ?></p>  
 				  	</div>
 				</div>
-			</div>			
+			</div>
+			<?php endwhile; else : ?>
+				<h6 class="text-center"><?php esc_html_e('No testimonials published','mogo' ); ?></h6>
+			<?php endif; 
+					wp_reset_query();
+			?>			
 		</div>				
 	</div>				
 </section>
