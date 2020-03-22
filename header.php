@@ -18,12 +18,12 @@
       				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <?php
                       wp_nav_menu( [
-                            'theme_location' => 'primary',
+                            'theme_location' => 'header_menu',
                             'container' => false,
                             'menu_class' => 'menu',
                             'menu_id' => '',
                             'fallback_cb' => '__return_false',
-                            'items_wrap' => '<ul id="%1$s" class="navbar-nav ml-auto">%3$s</ul>',
+                            'items_wrap' => '<ul id="%1$s" class="navbar-nav ml-auto mt-2 mt-lg-0">%3$s</ul>',
                             'depth' => 0,
                             'walker' => new Bootstrap_Menu_Walker(),
                       ] );

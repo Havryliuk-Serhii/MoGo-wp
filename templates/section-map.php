@@ -3,7 +3,7 @@
  * The template for displaying  section Map.
  */
 ?>
-<section class="map" style="bacground-image: url(<?php echo get_template_directory_uri('/img/map.png'); ?>);">
+<section class="map" id="contact" style="background-image: url(<?php echo get_theme_file_uri('/img/map.png'); ?>);">
 	<div class="container">
 	  	<div class="row">
 	  		<div class="col-md-12">

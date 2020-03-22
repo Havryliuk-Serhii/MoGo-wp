@@ -36,6 +36,7 @@ function mogo_scripts() {
 	wp_enqueue_script( 'mogo-main-script', get_template_directory_uri() . '/js/custom.js', array(), '', true );
 }
 add_action( 'wp_enqueue_scripts', 'mogo_scripts' );
+
 /**
  * Bootstrap Walker Nav menu
 **/

@@ -4,7 +4,7 @@
  */
 ?>
 <section class="blog">
-	<div class="container">
+	<div class="container d-flex flex-column">
 		<div class="row">
 			<div class="col-md-12">
 				<h4 class="font-weight-normal text-center description"><?php esc_html_e('Our stories','mogo' ); ?></h4>
@@ -36,18 +36,18 @@
 				    </div>
 				</div>
 		  	</article>
-		  	<?php endwhile;?>        
-			<?php else : ?>
+		  	<?php endwhile; else : ?>
 					<h6 class="text-center"><?php esc_html_e('No posts published','mogo' ); ?></h6>
 		<?php endif;
             wp_reset_query();
-        ?>         		
-				<div class="row">
-				    		<div class="col-12 archive-link">
+        ?>    		
+				 	
+				    	
+		   			</div>
+		   			<div class="row">
+				    		<div class="col-12 text-center archive-link">
 				    			<a href="<?php echo get_post_type_archive_link('post'); ?>"><?php esc_html_e('View more','mogo' ); ?></a>
 				    		</div>
-				    	</div>    	
-				    	
-		   			</div>	
+				    	</div>   	
 				</div>						
 			</section>
