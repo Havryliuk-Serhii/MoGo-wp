@@ -1,13 +1,16 @@
 <?php
 show_admin_bar(false);
-function mogo_setup() {
+
+if ( ! function_exists( 'mogo_setup' ) ) :
+	
+	function mogo_setup() {
 
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails' );
 		register_nav_menus( array(
 			'menu-1' => esc_html__( 'Primary', 'mogo' ),
 		) );
-
+		
 		add_theme_support( 'html5', array(
 			'search-form',
 			'comment-form',
@@ -15,7 +18,11 @@ function mogo_setup() {
 			'gallery',
 			'caption',
 		) );
-}
+
+		
+	}
+endif;
+
 add_action( 'after_setup_theme', 'mogo_setup' );
 
 /**
@@ -140,14 +147,51 @@ function my_custom_slider(){
 		'publicly_queryable' => true,
 		'show_ui'            => true,
 		'show_in_menu'       => true,
+		'show in rest'       => true,
 		'query_var'          => true,
 		'rewrite'            => true,
 		'capability_type'    => 'post',
 		'has_archive'        => true,
 		'hierarchical'       => false,
-    'menu_icon'          => 'dashicons-images-alt',
+		'taxonomies'          => array( 'category' ),
+    	'menu_icon'          => 'dashicons-images-alt',
+    	'menu_position'      => 8,
+		'supports'           => array('title', 'editor', 'thumbnail', 'author' )
+	) );
+}
+
+/**
+ * Custom post Team
+ **/
+add_action('init', 'my_team_post');
+function my_team_post(){
+	register_post_type('team_post', array(
+		'labels'             => array(
+			'name'               => 'Team ',
+			'singular_name'      => 'Team',
+			'add_new'            => 'Add new',
+			'add_new_item'       => 'Add new team mate',
+			'edit_item'          => 'Edit team',
+			'new_item'           => 'New team ',
+			'view_item'          => 'View team',
+			'search_items'       => 'Search team',
+			'not_found'          =>  'Team not found',
+			'not_found_in_trash' => 'Team not found in trash',
+			'parent_item_colon'  => '',
+			'menu_name'          => 'Team',
+		  ),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => true,
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => false,
+    'menu_icon'          => 'dashicons-groups',
     'menu_position'      => 9,
-		'supports'           => array('title','editor', 'thumbnail', )
+		'supports'           => array('title', 'thumbnail', )
 	) );
 }
 
@@ -180,14 +224,13 @@ if ( ! function_exists( 'mogo_of_get_option' ) ) {
 
 function mogo_widgets_init() {
 	register_sidebar( array(
-		'name'          => esc_html__( 'Sidebar', 'mogo' ),
-		'id'            => 'sidebar-1',
+		'name'          => esc_html__( 'Instagram widget', 'mogo' ),
+		'id'            => 'instagram-widget',
 		'description'   => esc_html__( 'Add widgets here.', 'mogo' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
+		'before_widget' => '',
+		'after_widget'  => '',
 	) );
+
 }
 add_action( 'widgets_init', 'mogo_widgets_init' );
 
@@ -216,3 +259,190 @@ if ( ! function_exists( 'post_pagination' ) ) :
         ) );
    }
 endif;
+
+/**
+* Social icon links
+**/
+//Facebook
+function fb_options(){
+		add_settings_field(
+		'facebook', 
+		'Fasebook link', 
+		'display_fb',
+		'general' 
+	);
+    
+	register_setting(
+		'general', 
+		'fb-link' 
+	);
+}
+add_action('admin_init', 'fb_options');
+function display_fb(){
+	echo "<input type='text' class='regular-text' name='fb-link' value='" . esc_attr(get_option('fb-link')) . "'>";
+}
+
+//Tweeter
+function tw_options(){
+		add_settings_field(
+		'tweeter', 
+		'Tweeter link', 
+		'display_tw',
+		'general' 
+	);
+    
+	register_setting(
+		'general', 
+		'tw-link' 
+	);
+}
+add_action('admin_init', 'tw_options');
+function display_tw(){
+	echo "<input type='text' class='regular-text' name='tw-link' value='" . esc_attr(get_option('tw-link')) . "'>";
+}
+//Instagram
+function in_options(){
+		add_settings_field(
+		'instagram', 
+		'Instagram link', 
+		'display_in',
+		'general' 
+	);
+    
+	register_setting(
+		'general', 
+		'in-link' 
+	);
+}
+add_action('admin_init', 'in_options');
+function display_in(){
+	echo "<input type='text' class='regular-text' name='in-link' value='" . esc_attr(get_option('in-link')) . "'>";
+}
+//Pinterest
+function pin_options(){
+		add_settings_field(
+		'pinterest', 
+		'Pinterest link', 
+		'display_pin',
+		'general' 
+	);
+    
+	register_setting(
+		'general', 
+		'pin-link' 
+	);
+}
+add_action('admin_init', 'pin_options');
+function display_pin(){
+	echo "<input type='text' class='regular-text' name='pin-link' value='" . esc_attr(get_option('pin-link')) . "'>";
+}
+//Google
+function gp_options(){
+		add_settings_field(
+		'google', 
+		'Google link', 
+		'display_gp',
+		'general' 
+	);
+    
+	register_setting(
+		'general', 
+		'gp-link' 
+	);
+}
+add_action('admin_init', 'gp_options');
+function display_gp(){
+	echo "<input type='text' class='regular-text' name='gp-link' value='" . esc_attr(get_option('gp-link')) . "'>";
+}
+//YouTube
+function yt_options(){
+		add_settings_field(
+		'youtube', 
+		'YouTube link', 
+		'display_yt',
+		'general' 
+	);
+    
+	register_setting(
+		'general', 
+		'yt-link' 
+	);
+}
+add_action('admin_init', 'yt_options');
+function display_yt(){
+	echo "<input type='text' class='regular-text' name='yt-link' value='" . esc_attr(get_option('yt-link')) . "'>";
+}
+//Dribble
+function dbl_options(){
+		add_settings_field(
+		'dribble', 
+		'Dribble link', 
+		'display_dbl',
+		'general' 
+	);
+    
+	register_setting(
+		'general', 
+		'dbl-link' 
+	);
+}
+add_action('admin_init', 'dbl_options');
+function display_dbl(){
+	echo "<input type='text' class='regular-text' name='dbl-link' value='" . esc_attr(get_option('dbl-link')) . "'>";
+}
+//Tumblr
+function tl_options(){
+		add_settings_field(
+		'tumblr', 
+		'Tumblr link', 
+		'display_tl',
+		'general' 
+	);
+    
+	register_setting(
+		'general', 
+		'tl-link' 
+	);
+}
+add_action('admin_init', 'tl_options');
+function display_tl(){
+	echo "<input type='text' class='regular-text' name='tl-link' value='" . esc_attr(get_option('tl-link')) . "'>";
+}
+
+/**
+ * Resent post widget
+**/
+add_image_size( 'mogo-recent-thumbnails', 120, 79, true ); 
+function mogo_recent_posts() {
+    $del_recent_posts = new WP_Query();
+    $del_recent_posts->query('showposts=3');
+        while ($del_recent_posts->have_posts()) : $del_recent_posts->the_post(); ?>
+			<li class="d-flex flex-row">
+                <a href="<?php esc_url(the_permalink()); ?>">
+                    <?php the_post_thumbnail('mogo-recent-thumbnails'); ?>
+                </a>
+                <div class="recent-content d-flex flex-column">
+                	<a href="<?php esc_url(the_permalink()); ?>">
+                        <?php esc_html(the_title()); ?>
+                   </a>
+                	<span class="date"><?php the_time('M, j, Y'); ?></span>
+				</div>
+            </li>
+        <?php endwhile;
+    wp_reset_postdata();
+}
+
+
+
+/**
+ * Add gallery size for instagram  widget 
+**/
+function insta_sizes( $sizes ) {
+    return array_merge( $sizes, array(
+        'insta_thumb' => 'Instagram image',
+    ) );
+}
+add_filter( 'image_size_names_choose', 'insta_sizes' );
+add_image_size( 'insta_thumb', 120, 120, true );
+
+ 

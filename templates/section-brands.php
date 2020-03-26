@@ -4,6 +4,7 @@
  */
 ?>
 <section class="brands">
+	<h3 class="section-title-none">brands</h3>
 	<div class="container">
 		<div class="row text-center">
 			<div class="col-md-2 ">

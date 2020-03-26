@@ -13,8 +13,8 @@
 				<p class="text-center specification-about"><?php the_field('descr_about') ?></p>
 			</div>
 		</div>				
-		<div class="row">
-			<div class="col-md-4 col-sm-12">
+		<div class="row img-section">
+			<div class="col-md-4 col-12">
 				<div class="card mt-5 mb-5 photo">
 					<img src="<?php echo get_template_directory_uri(); ?>/img/Rectangle1.png" alt="">
 					<div class="overlay"></div>

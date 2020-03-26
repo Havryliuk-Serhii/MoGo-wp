@@ -18,7 +18,7 @@
             $posts_service_upper = new WP_Query(array('cat' => $id, 'order' => 'ASC','posts_per_page' => 3));
         ?> 
 			<?php if ($posts_service_upper->have_posts() ) : while ( $posts_service_upper->have_posts() ) : $posts_service_upper->the_post(); ?>
-			<div class="col-md-4 d-flex flex-row">
+			<div class="col-md-4 d-flex flex-row bordering">
 				<div class="service-icon">
 					<?php echo get_the_post_thumbnail(); ?>		
 				</div>

@@ -4,6 +4,7 @@
  */
 ?>
 <section class="counter-section">
+	<h3 class="section-title-none">counter</h3>
 	<div class="container">
 		<div class="row">	
 			<div class="number text-center">

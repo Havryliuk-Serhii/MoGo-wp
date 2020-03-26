@@ -14,7 +14,7 @@
 		</div>
 	</div>				
 	<div class="container">
-		<div class="feauture-img d-lg-block">
+		<div class="feauture-img d-block">
 			<img src="<?php echo get_template_directory_uri(); ?>/img/feauture.png" alt="">
 		</div>
 	</div>								

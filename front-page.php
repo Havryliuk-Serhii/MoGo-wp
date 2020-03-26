@@ -5,7 +5,7 @@
 get_header('main');
 ?>
 <?php
-	get_template_part( 'templates/section-slider'); 
+	get_template_part( 'templates/section-hero'); 
   	get_template_part( 'templates/section-about');
   	get_template_part( 'templates/section-counter');
   	get_template_part( 'templates/section-service');
