@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Bootstrap Walker Nav menu
 **/
@@ -221,15 +221,15 @@ endif;
 //Facebook
 function fb_options(){
 		add_settings_field(
-		'facebook', 
-		'Fasebook link', 
+		'facebook',
+		'Fasebook link',
 		'display_fb',
-		'general' 
+		'general'
 	);
-    
+
 	register_setting(
-		'general', 
-		'fb-link' 
+		'general',
+		'fb-link'
 	);
 }
 add_action('admin_init', 'fb_options');
@@ -240,15 +240,15 @@ function display_fb(){
 //Tweeter
 function tw_options(){
 		add_settings_field(
-		'tweeter', 
-		'Tweeter link', 
+		'tweeter',
+		'Tweeter link',
 		'display_tw',
-		'general' 
+		'general'
 	);
-    
+
 	register_setting(
-		'general', 
-		'tw-link' 
+		'general',
+		'tw-link'
 	);
 }
 add_action('admin_init', 'tw_options');
@@ -258,15 +258,15 @@ function display_tw(){
 //Instagram
 function in_options(){
 		add_settings_field(
-		'instagram', 
-		'Instagram link', 
+		'instagram',
+		'Instagram link',
 		'display_in',
-		'general' 
+		'general'
 	);
-    
+
 	register_setting(
-		'general', 
-		'in-link' 
+		'general',
+		'in-link'
 	);
 }
 add_action('admin_init', 'in_options');
@@ -276,15 +276,15 @@ function display_in(){
 //Pinterest
 function pin_options(){
 		add_settings_field(
-		'pinterest', 
-		'Pinterest link', 
+		'pinterest',
+		'Pinterest link',
 		'display_pin',
-		'general' 
+		'general'
 	);
-    
+
 	register_setting(
-		'general', 
-		'pin-link' 
+		'general',
+		'pin-link'
 	);
 }
 add_action('admin_init', 'pin_options');
@@ -294,15 +294,15 @@ function display_pin(){
 //Google
 function gp_options(){
 		add_settings_field(
-		'google', 
-		'Google link', 
+		'google',
+		'Google link',
 		'display_gp',
-		'general' 
+		'general'
 	);
-    
+
 	register_setting(
-		'general', 
-		'gp-link' 
+		'general',
+		'gp-link'
 	);
 }
 add_action('admin_init', 'gp_options');
@@ -312,15 +312,15 @@ function display_gp(){
 //YouTube
 function yt_options(){
 		add_settings_field(
-		'youtube', 
-		'YouTube link', 
+		'youtube',
+		'YouTube link',
 		'display_yt',
-		'general' 
+		'general'
 	);
-    
+
 	register_setting(
-		'general', 
-		'yt-link' 
+		'general',
+		'yt-link'
 	);
 }
 add_action('admin_init', 'yt_options');
@@ -330,15 +330,15 @@ function display_yt(){
 //Dribble
 function dbl_options(){
 		add_settings_field(
-		'dribble', 
-		'Dribble link', 
+		'dribble',
+		'Dribble link',
 		'display_dbl',
-		'general' 
+		'general'
 	);
-    
+
 	register_setting(
-		'general', 
-		'dbl-link' 
+		'general',
+		'dbl-link'
 	);
 }
 add_action('admin_init', 'dbl_options');
@@ -348,15 +348,15 @@ function display_dbl(){
 //Tumblr
 function tl_options(){
 		add_settings_field(
-		'tumblr', 
-		'Tumblr link', 
+		'tumblr',
+		'Tumblr link',
 		'display_tl',
-		'general' 
+		'general'
 	);
-    
+
 	register_setting(
-		'general', 
-		'tl-link' 
+		'general',
+		'tl-link'
 	);
 }
 add_action('admin_init', 'tl_options');
@@ -367,7 +367,7 @@ function display_tl(){
 /**
  * Resent post widget
 **/
-add_image_size( 'mogo-recent-thumbnails', 120, 79, true ); 
+add_image_size( 'mogo-recent-thumbnails', 120, 79, true );
 function mogo_recent_posts() {
     $del_recent_posts = new WP_Query();
     $del_recent_posts->query('showposts=3');
@@ -388,7 +388,7 @@ function mogo_recent_posts() {
 }
 
 /**
- * Add gallery size for instagram  widget 
+ * Add gallery size for instagram  widget
 **/
 function insta_sizes( $sizes ) {
     return array_merge( $sizes, array(
@@ -398,3 +398,7 @@ function insta_sizes( $sizes ) {
 add_filter( 'image_size_names_choose', 'insta_sizes' );
 add_image_size( 'insta_thumb', 120, 120, true );
 
+/**
+ *	Default WordPress custom field
+ **/
+add_filter('acf/settings/remove_wp_meta_box', '__return_false');

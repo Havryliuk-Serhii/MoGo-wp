@@ -1,15 +1,15 @@
 <?php
-
+show_admin_bar( false );
 if ( ! function_exists( 'mogo_setup' ) ) :
-	
+
 	function mogo_setup() {
 
 		add_theme_support( 'title-tag' );
 		add_theme_support( 'post-thumbnails' );
 		register_nav_menus( array(
-			'menu-1' => esc_html__( 'Primary', 'mogo' ),
+			'header_menu' => esc_html__( 'Primary', 'mogo' ),
 		) );
-		
+
 		add_theme_support( 'html5', array(
 			'search-form',
 			'comment-form',
@@ -18,7 +18,7 @@ if ( ! function_exists( 'mogo_setup' ) ) :
 			'caption',
 		) );
 
-		
+
 	}
 endif;
 
